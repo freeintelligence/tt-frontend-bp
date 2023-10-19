@@ -25,4 +25,25 @@ export class ProductService {
       },
     });
   }
+
+  verifyProduct(id: string | null): Promise<any> {
+    return new Promise((resolve, reject) => {
+      if (id === null) {
+        return reject(new Error('id is null'));
+      }
+
+      return this.http
+        .get<any>(`${environment.apiUrl}/bp/products/verification?id=${id}`, {
+          observe: 'response',
+        })
+        .subscribe({
+          next: (result) => {
+            resolve(result.body);
+          },
+          error(err) {
+            reject(err);
+          },
+        });
+    });
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FixedSpinnerService } from 'src/services/fixed-spinner.service';
+import { ProductService } from 'src/services/product.service';
 import {
   addDays,
   currentDate,
@@ -45,7 +46,10 @@ export class CreateComponent implements OnInit {
     ),
   });
 
-  constructor(private fixedSpinner: FixedSpinnerService) {}
+  constructor(
+    private fixedSpinnerService: FixedSpinnerService,
+    private productService: ProductService
+  ) {}
 
   ngOnInit(): void {
     this.form.controls.id.setValue(randomString(10));
@@ -72,11 +76,23 @@ export class CreateComponent implements OnInit {
     return null;
   }
 
-  submit() {
+  async submit() {
     if (this.form.invalid) {
       return markFormAsTouched(this.form);
     }
 
-    this.fixedSpinner.show();
+    try {
+      const exists = await this.productService.verifyProduct(
+        this.form.controls.id.value
+      );
+
+      if (exists) {
+        alert('existe!')
+      }
+
+      this.fixedSpinnerService.show();
+    } catch (err) {
+      console.error('detectamos el error');
+    }
   }
 }
