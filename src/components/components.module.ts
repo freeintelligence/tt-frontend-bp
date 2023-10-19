@@ -6,7 +6,7 @@ import { GenericTableComponent } from './generic-table/generic-table.component';
 
 @NgModule({
   declarations: [HeaderComponent, InputTextComponent, GenericTableComponent],
-  exports: [HeaderComponent, InputTextComponent],
+  exports: [HeaderComponent, InputTextComponent, GenericTableComponent],
 
   imports: [CommonModule],
 })
