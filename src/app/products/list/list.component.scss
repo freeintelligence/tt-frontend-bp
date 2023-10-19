@@ -1,9 +1,37 @@
 .header {
-  display: block;
   width: 100%;
   margin: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-  .search-box {
-    width: 212px;
+  .search-box,
+  .right-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .right-options {
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        margin: 0;
+        padding: 0;
+
+        a {
+          text-decoration: none;
+          background-color: #ffdc00;
+          padding: 16px;
+          color: #333;
+          font-weight: bold;
+          font-size: 0.8em;
+          border-radius: 4px;
+        }
+      }
+    }
   }
 }
