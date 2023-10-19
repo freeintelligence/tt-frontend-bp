@@ -7,6 +7,7 @@ import {
   markFormAsTouched,
   randomString,
 } from 'src/utils/utils';
+import { ValidatorDateAfterThan } from 'src/validators/ValidatorDateAfterThan';
 
 @Component({
   selector: 'app-create',
@@ -31,7 +32,10 @@ export class CreateComponent implements OnInit {
       Validators.maxLength(200),
     ]),
     logo: new FormControl('', [Validators.required]),
-    date_release: new FormControl(currentDate(), [Validators.required]),
+    date_release: new FormControl(currentDate(), [
+      Validators.required,
+      ValidatorDateAfterThan(new Date(currentDate())),
+    ]),
     date_revision: new FormControl(
       {
         value: '',
