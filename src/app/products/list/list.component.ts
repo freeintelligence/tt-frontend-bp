@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   TableData,
   TableHeader,
 } from 'src/components/generic-table/generic-table.component';
+import { ProductService } from 'src/services/product.service';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent {
+export class ListComponent implements OnInit {
   public headers: TableHeader[] = [
     { label: 'Logo', key: 'imageUrl', type: 'imageUrl' },
     { label: 'Nombre del producto', key: 'name', type: 'text' },
@@ -79,4 +80,16 @@ export class ListComponent {
       reestructuration_date: '01/01/2022',
     },
   ];
+
+  constructor(private productService: ProductService) {}
+
+  ngOnInit() {
+    this.getProducts();
+  }
+
+  getProducts() {
+    this.productService.getProducts().subscribe((products) => {
+      console.log(products);
+    });
+  }
 }
