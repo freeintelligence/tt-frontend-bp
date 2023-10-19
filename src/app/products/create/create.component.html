@@ -62,6 +62,7 @@
           <label for="">Fecha Liberación</label>
           <app-form-input
             formControlName="date_release"
+            (ngModelChange)="setDateRevision()"
             type="date"
             [validationMessages]="{
               required: 'Este campo es requerido!',
