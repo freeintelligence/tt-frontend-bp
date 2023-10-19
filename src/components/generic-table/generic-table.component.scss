@@ -1,31 +1,36 @@
-.table-content {
+.table-container {
   background-color: white;
   border: solid 1px #eee;
   border-radius: 4px;
   padding: 24px;
 
-  table {
-    width: 100%;
-    border-spacing: 0;
-    border-collapse: collapse;
+  .table-content {
+    overflow-x: auto;
 
-    tr {
-      th {
-        background: #f9fafc;
-        padding: 21px 4px;
-      }
+    table {
+      width: 100%;
+      border-spacing: 0;
+      border-collapse: collapse;
+      font-size: .8em;
 
-      td {
-        padding: 8px 4px;
-      }
+      tr {
+        th {
+          background: #f9fafc;
+          padding: 21px 4px;
+        }
 
-      th,
-      td {
-        text-align: center;
-        border-bottom: solid 2px #efefef;
+        td {
+          padding: 8px 4px;
+        }
 
-        img {
-          max-height: 54px;
+        th,
+        td {
+          text-align: center;
+          border-bottom: solid 2px #efefef;
+
+          img {
+            max-height: 54px;
+          }
         }
       }
     }
