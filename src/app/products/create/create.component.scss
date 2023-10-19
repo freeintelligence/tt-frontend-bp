@@ -53,6 +53,7 @@
       text-align: center;
 
       button {
+        cursor: pointer;
         width: 164px;
         padding: 24px;
         margin: 24px;
@@ -70,6 +71,10 @@
 
       button.submit-form {
         background-color: #f9de4b;
+      }
+
+      button:hover {
+        filter: brightness(110%);
       }
     }
   }

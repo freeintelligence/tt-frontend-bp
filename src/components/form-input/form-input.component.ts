@@ -1,6 +1,7 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FormControl, ControlContainer } from '@angular/forms';
+import { ValidationMessages } from '../form-error-text/form-error-text.component';
 
 @Component({
   selector: 'app-form-input',
@@ -20,6 +21,7 @@ export class FormInputComponent implements ControlValueAccessor {
 
   @Input() placeholder: string = '';
   @Input() type!: string;
+  @Input() validationMessages: ValidationMessages = {};
 
   value!: string;
   isDisabled!: boolean;

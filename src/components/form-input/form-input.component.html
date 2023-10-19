@@ -8,6 +8,7 @@
   [class.danger]="control.invalid && (control.touched || control.dirty)"
 />
 
-<ng-container *ngIf="control.touched" [ngSwitch]="true">
-  <p *ngSwitchCase="control.errors?.['required']">Este campo es requerido!</p>
-</ng-container>
+<app-form-error-text
+  [control]="control"
+  [validationMessages]="validationMessages"
+></app-form-error-text>

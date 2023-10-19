@@ -6,16 +6,32 @@
   <div class="separator"></div>
 
   <div class="form-container">
-    <form autocomplete="off" [formGroup]="form">
+    <form autocomplete="off" [formGroup]="form" (submit)="submit()">
       <div class="elements-container-general">
         <div class="element-container">
           <label>ID</label>
-          <app-form-input formControlName="id" type="text"></app-form-input>
+          <app-form-input
+            formControlName="id"
+            type="text"
+            [validationMessages]="{
+              required: 'Este campo es requerido!',
+              minlength: 'Mínimo 3 caracteres!',
+              maxlength: 'Máximo 10 caracteres!',
+            }"
+          ></app-form-input>
         </div>
 
         <div class="element-container">
           <label for="">Nombre</label>
-          <app-form-input formControlName="name" type="text"></app-form-input>
+          <app-form-input
+            formControlName="name"
+            type="text"
+            [validationMessages]="{
+              required: 'Este campo es requerido!',
+              minlength: 'Mínimo 5 caracteres!',
+              maxlength: 'Máximo 100 caracteres!',
+            }"
+          ></app-form-input>
         </div>
 
         <div class="element-container danger">
@@ -23,12 +39,23 @@
           <app-form-input
             formControlName="description"
             type="text"
+            [validationMessages]="{
+              required: 'Este campo es requerido!',
+              minlength: 'Mínimo 10 caracteres!',
+              maxlength: 'Máximo 200 caracteres!',
+            }"
           ></app-form-input>
         </div>
 
         <div class="element-container">
           <label for="">Logo</label>
-          <app-form-input formControlName="logo" type="url"></app-form-input>
+          <app-form-input
+            formControlName="logo"
+            type="url"
+            [validationMessages]="{
+              required: 'Este campo es requerido!'
+            }"
+          ></app-form-input>
         </div>
 
         <div class="element-container">
@@ -36,6 +63,9 @@
           <app-form-input
             formControlName="date_release"
             type="date"
+            [validationMessages]="{
+              required: 'Este campo es requerido!',
+            }"
           ></app-form-input>
         </div>
 
@@ -44,6 +74,9 @@
           <app-form-input
             formControlName="date_revision"
             type="date"
+            [validationMessages]="{
+              required: 'Este campo es requerido!',
+            }"
           ></app-form-input>
         </div>
       </div>

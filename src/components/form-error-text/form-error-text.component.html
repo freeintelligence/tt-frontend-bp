@@ -1,1 +1,12 @@
-<p>form-error-text works!</p>
+<ng-container
+  *ngIf="control.invalid && (control.touched || control.dirty)"
+  [ngSwitch]="true"
+>
+  <ng-container *ngFor="let validation of validationMessages | keyvalue">
+    <p>
+      <ng-container *ngSwitchCase="!!control.errors?.[validation.key]">
+        {{ validation.value }}
+      </ng-container>
+    </p>
+  </ng-container>
+</ng-container>
