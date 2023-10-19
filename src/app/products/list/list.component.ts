@@ -3,6 +3,7 @@ import {
   TableData,
   TableHeader,
 } from 'src/components/generic-table/generic-table.component';
+import { environment } from 'src/environments/environment';
 import { ProductService } from 'src/services/product.service';
 
 @Component({
@@ -12,74 +13,17 @@ import { ProductService } from 'src/services/product.service';
 })
 export class ListComponent implements OnInit {
   public headers: TableHeader[] = [
-    { label: 'Logo', key: 'imageUrl', type: 'imageUrl' },
+    { label: 'Logo', key: 'logo', type: 'imageUrl' },
     { label: 'Nombre del producto', key: 'name', type: 'text' },
     { label: 'Descripción', key: 'description', type: 'text' },
-    { label: 'Fecha de liberación', key: 'liberation_date', type: 'text' },
+    { label: 'Fecha de liberación', key: 'date_release', type: 'text' },
     {
       label: 'Fecha de reestructuración',
-      key: 'reestructuration_date',
+      key: 'date_revision',
       type: 'text',
     },
   ];
-  public data: TableData[] = [
-    {
-      imageUrl: 'https://via.placeholder.com/150',
-      name: 'Producto 1',
-      description: 'Descripción del producto 1',
-      liberation_date: '01/01/2022',
-      reestructuration_date: '01/01/2022',
-    },
-    {
-      imageUrl: 'https://via.placeholder.com/150',
-      name: 'Producto 2',
-      description: 'Descripción del producto 2',
-      liberation_date: '01/01/2022',
-      reestructuration_date: '01/01/2022',
-    },
-    {
-      imageUrl: 'https://via.placeholder.com/150',
-      name: 'Producto 3',
-      description: 'Descripción del producto 3',
-      liberation_date: '01/01/2022',
-      reestructuration_date: '01/01/2022',
-    },
-    {
-      imageUrl: 'https://via.placeholder.com/150',
-      name: 'Producto 4',
-      description: 'Descripción del producto 4',
-      liberation_date: '01/01/2022',
-      reestructuration_date: '01/01/2022',
-    },
-    {
-      imageUrl: 'https://via.placeholder.com/150',
-      name: 'Producto 5',
-      description: 'Descripción del producto 5',
-      liberation_date: '01/01/2022',
-      reestructuration_date: '01/01/2022',
-    },
-    {
-      imageUrl: 'https://via.placeholder.com/150',
-      name: 'Producto 6',
-      description: 'Descripción del producto 6',
-      liberation_date: '01/01/2022',
-      reestructuration_date: '01/01/2022',
-    },
-    {
-      imageUrl: 'https://via.placeholder.com/150',
-      name: 'Producto 7',
-      description: 'Descripción del producto 7',
-      liberation_date: '01/01/2022',
-      reestructuration_date: '01/01/2022',
-    },
-    {
-      imageUrl: 'https://via.placeholder.com/150',
-      name: 'Producto 8',
-      description: 'Descripción del producto 8',
-      liberation_date: '01/01/2022',
-      reestructuration_date: '01/01/2022',
-    },
-  ];
+  public data: TableData[] = [];
 
   constructor(private productService: ProductService) {}
 
@@ -89,7 +33,15 @@ export class ListComponent implements OnInit {
 
   getProducts() {
     this.productService.getProducts().subscribe((products) => {
-      console.log(products);
+      this.data = products.map((e) => {
+        if (typeof e.logo !== 'string' || e.logo.indexOf('http') !== 0) {
+          e.logo = environment.defaultProductImageUrl;
+        }
+
+        e.date_release = new Date(e.date_release).toLocaleDateString();
+        e.date_revision = new Date(e.date_revision).toLocaleDateString();
+        return e;
+      });
     });
   }
 }
