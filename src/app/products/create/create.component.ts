@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FixedSpinnerService } from 'src/services/fixed-spinner.service';
 import {
   addDays,
   currentDate,
@@ -40,6 +41,8 @@ export class CreateComponent implements OnInit {
     ),
   });
 
+  constructor(private fixedSpinner: FixedSpinnerService) {}
+
   ngOnInit(): void {
     this.form.controls.id.setValue(randomString(10));
     this.setDateRevision();
@@ -69,5 +72,7 @@ export class CreateComponent implements OnInit {
     if (this.form.invalid) {
       return markFormAsTouched(this.form);
     }
+
+    this.fixedSpinner.show();
   }
 }

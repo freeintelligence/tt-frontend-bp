@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { PaginationComponent } from './pagination/pagination.component';
 import { FormInputComponent } from './form-input/form-input.component';
 import { FormErrorTextComponent } from './form-error-text/form-error-text.component';
+import { FixedSpinnerComponent } from './fixed-spinner/fixed-spinner.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { FormErrorTextComponent } from './form-error-text/form-error-text.compon
     PaginationComponent,
     FormInputComponent,
     FormErrorTextComponent,
+    FixedSpinnerComponent,
   ],
   exports: [
     HeaderComponent,
@@ -24,6 +26,7 @@ import { FormErrorTextComponent } from './form-error-text/form-error-text.compon
     PaginationComponent,
     FormInputComponent,
     FormErrorTextComponent,
+    FixedSpinnerComponent,
   ],
 
   imports: [CommonModule, FormsModule],
