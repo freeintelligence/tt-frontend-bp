@@ -46,26 +46,6 @@
           font-weight: bold;
           padding: 12px 0;
         }
-
-        input {
-          box-sizing: border-box;
-          width: 100%;
-          margin: 0;
-          padding: 16px;
-          font-size: 18px;
-          border: solid 2px #777;
-          border-radius: 4px;
-        }
-      }
-
-      .element-container.danger {
-        input {
-          border-color: red !important;
-        }
-
-        p {
-          color: red;
-        }
       }
     }
 

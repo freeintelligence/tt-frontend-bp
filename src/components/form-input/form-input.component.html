@@ -1,0 +1,13 @@
+<input
+  [placeholder]="placeholder"
+  [type]="type"
+  [value]="value"
+  [disabled]="isDisabled"
+  (input)="onInput($event)"
+  (blur)="onTouch()"
+  [class.danger]="control.invalid && (control.touched || control.dirty)"
+/>
+
+<ng-container *ngIf="control.touched" [ngSwitch]="true">
+  <p *ngSwitchCase="control.errors?.['required']">Este campo es requerido!</p>
+</ng-container>

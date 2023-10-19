@@ -6,37 +6,45 @@
   <div class="separator"></div>
 
   <div class="form-container">
-    <form autocomplete="off">
+    <form autocomplete="off" [formGroup]="form">
       <div class="elements-container-general">
         <div class="element-container">
           <label>ID</label>
-          <input type="text" />
+          <app-form-input formControlName="id" type="text"></app-form-input>
         </div>
 
         <div class="element-container">
           <label for="">Nombre</label>
-          <input type="text" />
+          <app-form-input formControlName="name" type="text"></app-form-input>
         </div>
 
         <div class="element-container danger">
           <label for="">Descripción</label>
-          <input type="text" />
-          <p>Este campo es requerido!</p>
+          <app-form-input
+            formControlName="description"
+            type="text"
+          ></app-form-input>
         </div>
 
         <div class="element-container">
           <label for="">Logo</label>
-          <input type="text" />
+          <app-form-input formControlName="logo" type="url"></app-form-input>
         </div>
 
         <div class="element-container">
           <label for="">Fecha Liberación</label>
-          <input type="date" />
+          <app-form-input
+            formControlName="date_release"
+            type="date"
+          ></app-form-input>
         </div>
 
         <div class="element-container">
           <label for="">Fecha Revisión</label>
-          <input type="date" />
+          <app-form-input
+            formControlName="date_revision"
+            type="date"
+          ></app-form-input>
         </div>
       </div>
 

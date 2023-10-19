@@ -1,0 +1,12 @@
+input {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 16px;
+  font-size: 18px;
+  border: solid 2px #777;
+  border-radius: 4px;
+}
+.danger {
+  border-color: red !important;
+}
