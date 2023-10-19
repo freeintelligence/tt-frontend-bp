@@ -21,6 +21,7 @@ export class ListComponent implements OnInit {
     },
   ];
   public data: Product[] = [];
+  public perPageOptions: number[] = [5, 10, 20];
   public searchTerm = '';
 
   constructor(private productService: ProductService) {}

@@ -4,7 +4,7 @@
       <tr>
         <th *ngFor="let header of headers">{{ header.label }}</th>
       </tr>
-      <tr *ngFor="let item of data">
+      <tr *ngFor="let item of getRows()">
         <td *ngFor="let header of headers">
           <ng-container *ngIf="header.type === 'imageUrl'">
             <img [src]="item?.[header.key]" />
@@ -16,5 +16,26 @@
         </td>
       </tr>
     </table>
+  </div>
+
+  <div class="table-footer">
+    <div class="table-results-count">
+      <p>{{ data.length }} Resultados</p>
+    </div>
+
+    <div class="table-results-pagination">
+      <app-pagination
+        [currentPage]="currentPage"
+        [totalDataCount]="data.length"
+        [perPageDataCount]="resultsPerPage"
+        (pageChange)="pageChange($event)"
+      ></app-pagination>
+    </div>
+
+    <div class="table-results-per-page" *ngIf="perPageOptions.length">
+      <select [(ngModel)]="resultsPerPage" (ngModelChange)="setInitialPage()">
+        <option *ngFor="let option of perPageOptions">{{ option }}</option>
+      </select>
+    </div>
   </div>
 </div>

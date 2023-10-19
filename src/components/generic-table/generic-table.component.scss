@@ -11,7 +11,7 @@
       width: 100%;
       border-spacing: 0;
       border-collapse: collapse;
-      font-size: .8em;
+      font-size: 0.8em;
 
       tr {
         th {
@@ -32,6 +32,27 @@
             max-height: 54px;
           }
         }
+      }
+    }
+  }
+
+  .table-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+
+    .table-results-count {
+      text-align: left;
+    }
+
+    .table-results-per-page {
+      text-align: right;
+
+      select {
+        padding: 6px 12px;
+        border: solid 2px #ddd;
+        border-radius: 4px;
       }
     }
   }
