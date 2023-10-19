@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'tt-frontend-bp'`, () => {
+  it(`should have as title 'frontend-bp'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('tt-frontend-bp');
+    expect(app.title).toEqual('frontend-bp');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('tt-frontend-bp app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('frontend-bp app is running!');
   });
 });
