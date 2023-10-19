@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  TableData,
-  TableHeader,
-} from 'src/components/generic-table/generic-table.component';
+import { TableHeader } from 'src/components/generic-table/generic-table.component';
 import { environment } from 'src/environments/environment';
-import { ProductService } from 'src/services/product.service';
+import { Product, ProductService } from 'src/services/product.service';
 
 @Component({
   selector: 'app-list',
@@ -23,7 +20,8 @@ export class ListComponent implements OnInit {
       type: 'text',
     },
   ];
-  public data: TableData[] = [];
+  public data: Product[] = [];
+  public searchTerm = '';
 
   constructor(private productService: ProductService) {}
 
@@ -42,6 +40,25 @@ export class ListComponent implements OnInit {
         e.date_revision = new Date(e.date_revision).toLocaleDateString();
         return e;
       });
+    });
+  }
+
+  filteredProducts() {
+    const searchTerm = this.searchTerm.trim();
+
+    if (!searchTerm) {
+      return this.data;
+    }
+
+    const termOptions = searchTerm.toLowerCase().split(' ');
+
+    return this.data.filter((item) => {
+      return termOptions.filter((term) => {
+        return (
+          item.name.toLowerCase().indexOf(term) !== -1 ||
+          item.description.toLowerCase().indexOf(term) !== -1
+        );
+      }).length;
     });
   }
 }

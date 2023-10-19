@@ -7,11 +7,11 @@
       <tr *ngFor="let item of data">
         <td *ngFor="let header of headers">
           <ng-container *ngIf="header.type === 'imageUrl'">
-            <img [src]="item[header.key]" />
+            <img [src]="item?.[header.key]" />
           </ng-container>
 
           <ng-container *ngIf="!header.type || header.type === 'text'">
-            <span>{{ item[header.key] }}</span>
+            <span>{{ item?.[header.key] }}</span>
           </ng-container>
         </td>
       </tr>

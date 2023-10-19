@@ -1,9 +1,16 @@
 <div class="header">
   <div class="search-box">
-    <app-input-text type="text" placeholder="Search..."></app-input-text>
+    <app-input-text
+      [(ngModel)]="searchTerm"
+      type="text"
+      placeholder="Search..."
+    ></app-input-text>
   </div>
 </div>
 
 <div class="main">
-  <app-generic-table [headers]="headers" [data]="data"></app-generic-table>
+  <app-generic-table
+    [headers]="headers"
+    [data]="filteredProducts()"
+  ></app-generic-table>
 </div>

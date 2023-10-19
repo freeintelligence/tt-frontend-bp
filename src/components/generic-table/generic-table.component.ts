@@ -6,10 +6,6 @@ export interface TableHeader {
   type: 'text' | 'imageUrl';
 }
 
-export interface TableData {
-  [key: string]: string;
-}
-
 @Component({
   selector: 'app-generic-table',
   templateUrl: './generic-table.component.html',
@@ -17,5 +13,5 @@ export interface TableData {
 })
 export class GenericTableComponent {
   @Input() headers: TableHeader[] = [];
-  @Input() data: TableData[] = [];
+  @Input() data: { [key: string]: unknown }[] = [];
 }
