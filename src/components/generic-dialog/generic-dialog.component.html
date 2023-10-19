@@ -1,0 +1,17 @@
+<div *ngIf="status" class="overlay">
+  <div class="dialog-container">
+    <p>{{ data.message }}</p>
+
+    <div class="buttons-container">
+      <button
+        *ngFor="let button of data.buttons"
+        type="button"
+        [class]="button.type"
+        (click)="button.handle()"
+        [ngStyle]="{ width: button.width ?? 'auto' }"
+      >
+        {{ button.label }}
+      </button>
+    </div>
+  </div>
+</div>

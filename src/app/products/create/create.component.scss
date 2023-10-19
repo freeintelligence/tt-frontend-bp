@@ -48,34 +48,5 @@
         }
       }
     }
-
-    .buttons-container {
-      text-align: center;
-
-      button {
-        cursor: pointer;
-        width: 164px;
-        padding: 24px;
-        margin: 24px;
-        font-size: 1.2em;
-        background-color: white;
-        border: solid 1px #eee;
-        border-radius: 4px;
-        color: #424f6e;
-        font-weight: bold;
-      }
-
-      button.restart-form {
-        background-color: #e9ecf3;
-      }
-
-      button.submit-form {
-        background-color: #f9de4b;
-      }
-
-      button:hover {
-        filter: brightness(110%);
-      }
-    }
   }
 }

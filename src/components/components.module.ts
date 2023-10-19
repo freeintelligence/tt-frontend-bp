@@ -8,6 +8,7 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { FormInputComponent } from './form-input/form-input.component';
 import { FormErrorTextComponent } from './form-error-text/form-error-text.component';
 import { FixedSpinnerComponent } from './fixed-spinner/fixed-spinner.component';
+import { GenericDialogComponent } from './generic-dialog/generic-dialog.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FixedSpinnerComponent } from './fixed-spinner/fixed-spinner.component';
     FormInputComponent,
     FormErrorTextComponent,
     FixedSpinnerComponent,
+    GenericDialogComponent,
   ],
   exports: [
     HeaderComponent,
@@ -27,6 +29,7 @@ import { FixedSpinnerComponent } from './fixed-spinner/fixed-spinner.component';
     FormInputComponent,
     FormErrorTextComponent,
     FixedSpinnerComponent,
+    GenericDialogComponent,
   ],
 
   imports: [CommonModule, FormsModule],

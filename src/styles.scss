@@ -25,3 +25,33 @@ main {
   border-radius: 4px;
   padding: 24px;
 }
+
+.buttons-container {
+  text-align: center;
+  box-sizing: content-box;
+
+  button {
+    cursor: pointer;
+    width: 164px;
+    padding: 24px;
+    margin: 24px;
+    font-size: 1.2em;
+    background-color: white;
+    border: solid 1px #eee;
+    border-radius: 4px;
+    color: #424f6e;
+    font-weight: bold;
+  }
+
+  button.secondary {
+    background-color: #e9ecf3;
+  }
+
+  button.primary {
+    background-color: #f9de4b;
+  }
+
+  button:hover {
+    filter: brightness(110%);
+  }
+}

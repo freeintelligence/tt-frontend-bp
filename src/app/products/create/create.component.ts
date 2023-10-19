@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FixedSpinnerService } from 'src/services/fixed-spinner.service';
+import { GenericDialogService } from 'src/services/generic-dialog.service';
 import { ProductService } from 'src/services/product.service';
 import {
   addDays,
@@ -48,7 +49,8 @@ export class CreateComponent implements OnInit {
 
   constructor(
     private fixedSpinnerService: FixedSpinnerService,
-    private productService: ProductService
+    private productService: ProductService,
+    private genericDialogService: GenericDialogService
   ) {}
 
   ngOnInit(): void {
@@ -86,8 +88,20 @@ export class CreateComponent implements OnInit {
         this.form.controls.id.value
       );
 
-      if (exists) {
-        alert('existe!')
+      if (!exists) {
+        return this.genericDialogService.show({
+          message: 'El producto ya existe!',
+          buttons: [
+            {
+              label: 'Cerrar',
+              type: 'secondary',
+              width: '100%',
+              handle: () => {
+                this.genericDialogService.hide();
+              },
+            },
+          ],
+        });
       }
 
       this.fixedSpinnerService.show();
