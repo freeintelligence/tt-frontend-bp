@@ -53,6 +53,11 @@ export class ListComponent implements OnInit {
               `/products/edit/${this.productToUrl(product)}`
             ),
         },
+        {
+          label: 'Eliminar',
+          handle: (product: Product) =>
+            this.productService.questionDeleteProductDialog(product),
+        },
       ],
     },
   ];
@@ -62,11 +67,14 @@ export class ListComponent implements OnInit {
 
   constructor(private productService: ProductService, private router: Router) {}
 
-  productToUrl(product: Product) {
-    return btoa(JSON.stringify(product));
-  }
   ngOnInit() {
     this.getProducts();
+
+    this.productService.productChange.subscribe(() => this.getProducts());
+  }
+
+  productToUrl(product: Product) {
+    return btoa(JSON.stringify(product));
   }
 
   getProducts() {
