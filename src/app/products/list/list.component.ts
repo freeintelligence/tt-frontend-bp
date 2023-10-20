@@ -37,8 +37,14 @@ export class ListComponent implements OnInit {
           e.logo = environment.defaultProductImageUrl;
         }
 
-        e.date_release = new Date(e.date_release).toLocaleDateString();
-        e.date_revision = new Date(e.date_revision).toLocaleDateString();
+        if (e.date_release) {
+          e.date_release = new Date(e.date_release).toLocaleDateString();
+        }
+
+        if (e.date_revision) {
+          e.date_revision = new Date(e.date_revision).toLocaleDateString();
+        }
+
         return e;
       });
     });
@@ -56,8 +62,8 @@ export class ListComponent implements OnInit {
     return this.data.filter((item) => {
       return termOptions.filter((term) => {
         return (
-          item.name.toLowerCase().indexOf(term) !== -1 ||
-          item.description.toLowerCase().indexOf(term) !== -1
+          item?.name?.toLowerCase().indexOf(term) !== -1 ||
+          item?.description?.toLowerCase().indexOf(term) !== -1
         );
       }).length;
     });

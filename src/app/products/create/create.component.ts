@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FixedSpinnerService } from 'src/services/fixed-spinner.service';
 import { GenericDialogService } from 'src/services/generic-dialog.service';
 import { ProductService } from 'src/services/product.service';
@@ -50,7 +51,8 @@ export class CreateComponent implements OnInit {
   constructor(
     private fixedSpinnerService: FixedSpinnerService,
     private productService: ProductService,
-    private genericDialogService: GenericDialogService
+    private genericDialogService: GenericDialogService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -84,29 +86,79 @@ export class CreateComponent implements OnInit {
     }
 
     try {
-      const exists = await this.productService.verifyProduct(
-        this.form.controls.id.value
-      );
+      this.fixedSpinnerService.show();
 
-      if (!exists) {
-        return this.genericDialogService.show({
-          message: 'El producto ya existe!',
-          buttons: [
-            {
-              label: 'Cerrar',
-              type: 'secondary',
-              width: '100%',
-              handle: () => {
-                this.genericDialogService.hide();
-              },
-            },
-          ],
-        });
+      if (await this.ifExists()) {
+        return;
       }
 
-      this.fixedSpinnerService.show();
+      await this.productService.storeProduct(this.form.getRawValue());
+
+      await this.ifSuccess();
+
+      this.fixedSpinnerService.hide();
     } catch (err) {
-      console.error('detectamos el error');
+      this.ifError(err as Error);
+      this.fixedSpinnerService.hide();
     }
+  }
+
+  async ifExists() {
+    const exists = await this.productService.verifyProduct(
+      this.form.controls.id.value
+    );
+
+    if (exists) {
+      return this.genericDialogService.show({
+        message: 'El producto ya existe!',
+        buttons: [
+          {
+            label: 'Cerrar',
+            type: 'secondary',
+            width: '100%',
+            handle: () => {
+              this.genericDialogService.hide();
+            },
+          },
+        ],
+      });
+    }
+
+    return false;
+  }
+
+  async ifError(err: Error) {
+    console.error(err);
+    return this.genericDialogService.show({
+      message:
+        'Ocurrió un error al crear un registro, intente nuevamente más tarde!',
+      buttons: [
+        {
+          label: 'Cerrar',
+          type: 'danger',
+          width: '100%',
+          handle: () => {
+            this.genericDialogService.hide();
+          },
+        },
+      ],
+    });
+  }
+
+  async ifSuccess() {
+    return this.genericDialogService.show({
+      message: `Se registró correctamente el servicio "${this.form.controls.name.value}"!`,
+      buttons: [
+        {
+          label: 'Ir a la página principal',
+          type: 'primary',
+          width: '100%',
+          handle: () => {
+            this.router.navigateByUrl('/');
+            this.genericDialogService.hide();
+          },
+        },
+      ],
+    });
   }
 }

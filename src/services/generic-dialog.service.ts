@@ -2,7 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 
 export interface DialogButton {
   label: string;
-  type: 'primary' | 'secondary';
+  type: 'primary' | 'secondary' | 'danger';
   width?: string;
   handle: () => void;
 }

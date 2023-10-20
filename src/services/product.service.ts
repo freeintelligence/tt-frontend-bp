@@ -3,13 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 export interface Product {
-  id: string;
-  name: string;
-  description: string;
-  logo: string;
-  date_release: string;
-  date_revision: string;
-  [key: string]: string;
+  id?: string | null;
+  name?: string | null;
+  description?: string | null;
+  logo?: string | null;
+  date_release?: string | null;
+  date_revision?: string | null;
+  [key: string]: string | null | undefined;
 }
 
 @Injectable({
@@ -33,12 +33,42 @@ export class ProductService {
       }
 
       return this.http
-        .get<any>(`${environment.apiUrl}/bp/products/verification?id=${id}`, {
-          observe: 'response',
-        })
+        .get<boolean>(
+          `${environment.apiUrl}/bp/products/verification?id=${id}`,
+          {
+            observe: 'response',
+            headers: {
+              authorId: environment.authorId,
+            },
+          }
+        )
         .subscribe({
           next: (result) => {
             resolve(result.body);
+          },
+          error(err) {
+            reject(err);
+          },
+        });
+    });
+  }
+
+  storeProduct(data: Product): Promise<Product> {
+    return new Promise((resolve, reject) => {
+      return this.http
+        .post<any>(`${environment.apiUrl}/bp/products`, data, {
+          observe: 'response',
+          headers: {
+            authorId: environment.authorId,
+          },
+        })
+        .subscribe({
+          next: (result) => {
+            if (result.status === 200 /*201*/) {
+              resolve(result.body);
+            } else {
+              reject(new Error('error creating product'));
+            }
           },
           error(err) {
             reject(err);

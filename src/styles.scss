@@ -27,8 +27,11 @@ main {
 }
 
 .buttons-container {
+  width: 100%;
   text-align: center;
-  box-sizing: content-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   button {
     cursor: pointer;
@@ -45,6 +48,11 @@ main {
 
   button.secondary {
     background-color: #e9ecf3;
+  }
+
+  button.danger {
+    background-color: #cc0000;
+    color: white;
   }
 
   button.primary {
