@@ -14,6 +14,7 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { SkeletonComponent } from './skeleton/skeleton.component';
 import { AlertComponent } from './alert/alert.component';
 import { ButtonComponent } from './button/button.component';
+import { SelectTextComponent } from './select-text/select-text.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ButtonComponent } from './button/button.component';
     SkeletonComponent,
     AlertComponent,
     ButtonComponent,
+    SelectTextComponent,
   ],
   exports: [
     HeaderComponent,

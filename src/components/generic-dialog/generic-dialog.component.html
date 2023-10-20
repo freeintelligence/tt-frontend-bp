@@ -3,15 +3,15 @@
     <p>{{ data.message }}</p>
 
     <div class="buttons-container">
-      <button
+      <app-button
         *ngFor="let button of data.buttons"
         type="button"
         [class]="button.type"
         (click)="button.handle()"
-        [ngStyle]="{ width: button.width ?? 'auto' }"
+        [width]="button.width ?? 'auto'"
       >
         {{ button.label }}
-      </button>
+      </app-button>
     </div>
   </div>
 </div>

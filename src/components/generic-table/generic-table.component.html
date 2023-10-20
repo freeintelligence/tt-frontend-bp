@@ -59,9 +59,11 @@
     </div>
 
     <div class="table-results-per-page" *ngIf="perPageOptions.length">
-      <select [(ngModel)]="resultsPerPage" (ngModelChange)="setInitialPage()">
-        <option *ngFor="let option of perPageOptions">{{ option }}</option>
-      </select>
+      <app-select-text
+        [(ngModel)]="resultsPerPage"
+        (ngModelChange)="setInitialPage()"
+        [options]="perPageOptions"
+      ></app-select-text>
     </div>
   </div>
 </div>

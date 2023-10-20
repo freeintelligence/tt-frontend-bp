@@ -1,0 +1,5 @@
+<select [value]="value" [disabled]="isDisabled" (input)="onInput($event)">
+  <option *ngFor="let option of options" [value]="option?.value || option">
+    {{ option?.label || option }}
+  </option>
+</select>
