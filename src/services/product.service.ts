@@ -76,4 +76,28 @@ export class ProductService {
         });
     });
   }
+
+  updateProduct(data: Product): Promise<Product> {
+    return new Promise((resolve, reject) => {
+      return this.http
+        .put<any>(`${environment.apiUrl}/bp/products`, data, {
+          observe: 'response',
+          headers: {
+            authorId: environment.authorId,
+          },
+        })
+        .subscribe({
+          next: (result) => {
+            if (result.status === 200 /*204*/) {
+              resolve(result.body);
+            } else {
+              reject(new Error('error updating product'));
+            }
+          },
+          error(err) {
+            reject(err);
+          },
+        });
+    });
+  }
 }

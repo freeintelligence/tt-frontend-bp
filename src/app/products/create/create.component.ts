@@ -151,11 +151,11 @@ export class CreateComponent implements OnInit {
     try {
       this.fixedSpinnerService.show();
 
-      if (await this.ifSubmitExists()) {
-        return;
+      if (this.mode === 'create') {
+        await this.submitCreate();
+      } else if (this.mode === 'edit') {
+        await this.submitEdit();
       }
-
-      await this.productService.storeProduct(this.form.getRawValue());
 
       await this.ifSubmitSuccess();
 
@@ -166,13 +166,26 @@ export class CreateComponent implements OnInit {
     }
   }
 
+  async submitCreate() {
+    if (await this.ifSubmitExists()) {
+      this.fixedSpinnerService.hide();
+      return;
+    }
+
+    await this.productService.storeProduct(this.form.getRawValue());
+  }
+
+  async submitEdit() {
+    await this.productService.updateProduct(this.form.getRawValue());
+  }
+
   async ifSubmitExists() {
     const exists = await this.productService.verifyProduct(
       this.form.controls.id.value
     );
 
     if (exists) {
-      return this.genericDialogService.show({
+      this.genericDialogService.show({
         message: 'El producto ya existe!',
         buttons: [
           {
@@ -185,6 +198,8 @@ export class CreateComponent implements OnInit {
           },
         ],
       });
+
+      return true;
     }
 
     return false;
@@ -192,9 +207,15 @@ export class CreateComponent implements OnInit {
 
   async ifSubmitError(err: Error) {
     console.error(err);
-    return this.genericDialogService.show({
-      message:
+
+    const message = {
+      create:
         'Ocurrió un error al crear un registro, intente nuevamente más tarde!',
+      edit: 'Ocurrió un error al editar el registro, intente nuevamente más tarde!',
+    };
+
+    return this.genericDialogService.show({
+      message: message[this.mode],
       buttons: [
         {
           label: 'Cerrar',
@@ -209,8 +230,14 @@ export class CreateComponent implements OnInit {
   }
 
   async ifSubmitSuccess() {
+    const message = {
+      create:
+      `Se registró correctamente el servicio "${this.form.controls.name.value}" (${this.form.controls.id.value})!`,
+      edit:`Se editó correctamente el servicio "${this.form.controls.name.value}" (${this.form.controls.id.value})!`,
+    };
+
     return this.genericDialogService.show({
-      message: `Se registró correctamente el servicio "${this.form.controls.name.value}"!`,
+      message: message[this.mode],
       buttons: [
         {
           label: 'Ir a la página principal',
