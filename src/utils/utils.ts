@@ -8,13 +8,30 @@ export const markFormAsTouched = (form: FormGroup) => {
 };
 
 export const currentDate = () => {
-  return new Date().toISOString().substring(0, 10);
+  return substringDate(new Date());
 };
 
 export const addDays = (date: string, days: number) => {
   const d = new Date(date);
   d.setDate(d.getDate() + days);
-  return d.toISOString().substring(0, 10);
+  return substringDate(d);
+};
+
+export const substringDate = (date: Date) => {
+  return date.toISOString().substring(0, 10);
+};
+
+export const dateStringToDateLocaleString = (
+  dateAsString: string,
+  reverse: boolean = false
+) => {
+  const str = new Date(dateAsString).toLocaleDateString();
+
+  if (!reverse) {
+    return str;
+  }
+
+  return str.split('-').reverse().join('-');
 };
 
 export const randomString = (length: number) => {

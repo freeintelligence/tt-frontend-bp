@@ -6,12 +6,32 @@
       </tr>
       <tr *ngFor="let item of getRows()">
         <td *ngFor="let header of headers">
-          <ng-container *ngIf="header.type === 'imageUrl'">
-            <img [src]="item?.[header.key]" />
+          <ng-container *ngIf="header.key">
+            <ng-container *ngIf="!header.type || header.type === 'text'">
+              <span>{{ valueTransform(header, item?.[header.key]) }}</span>
+            </ng-container>
+
+            <ng-container *ngIf="header.type === 'imageUrl'">
+              <img [src]="valueTransform(header, item?.[header.key])" />
+            </ng-container>
           </ng-container>
 
-          <ng-container *ngIf="!header.type || header.type === 'text'">
-            <span>{{ item?.[header.key] }}</span>
+          <ng-container *ngIf="!header.key">
+            <ng-container *ngIf="header.type === 'dropdown'">
+              <div class="dropdown">
+                <button class="dropbtn">
+                  <img src="/assets/images/elipsis.svg" />
+                </button>
+                <div class="dropdown-content">
+                  <a
+                    href="javascript:void(0)"
+                    *ngFor="let option of header.dropdownOptions"
+                    (click)="option.handle?.(item)"
+                    >{{ option.label }}</a
+                  >
+                </div>
+              </div>
+            </ng-container>
           </ng-container>
         </td>
       </tr>

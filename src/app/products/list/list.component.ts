@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TableHeader } from 'src/components/generic-table/generic-table.component';
 import { environment } from 'src/environments/environment';
 import { Product, ProductService } from 'src/services/product.service';
+import { dateStringToDateLocaleString } from 'src/utils/utils';
 
 @Component({
   selector: 'app-list',
@@ -10,43 +12,66 @@ import { Product, ProductService } from 'src/services/product.service';
 })
 export class ListComponent implements OnInit {
   public headers: TableHeader[] = [
-    { label: 'Logo', key: 'logo', type: 'imageUrl' },
+    {
+      label: 'Logo',
+      key: 'logo',
+      type: 'imageUrl',
+      valueTransform(value) {
+        if (typeof value !== 'string' || value.indexOf('http') !== 0) {
+          return environment.defaultProductImageUrl;
+        }
+
+        return value;
+      },
+    },
     { label: 'Nombre del producto', key: 'name', type: 'text' },
     { label: 'Descripción', key: 'description', type: 'text' },
-    { label: 'Fecha de liberación', key: 'date_release', type: 'text' },
+    {
+      label: 'Fecha de liberación',
+      key: 'date_release',
+      type: 'text',
+      valueTransform(value) {
+        return dateStringToDateLocaleString(value as string);
+      },
+    },
     {
       label: 'Fecha de reestructuración',
       key: 'date_revision',
       type: 'text',
+      valueTransform(value) {
+        return dateStringToDateLocaleString(value as string);
+      },
+    },
+    {
+      label: '',
+      type: 'dropdown',
+      dropdownOptions: [
+        {
+          label: 'Editar',
+          handle: (product: Product) =>
+            this.router.navigateByUrl(
+              `/products/edit/${this.productToUrl(product)}`
+            ),
+        },
+      ],
     },
   ];
   public data: Product[] = [];
   public perPageOptions: number[] = [5, 10, 20];
   public searchTerm = '';
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private router: Router) {}
 
+  productToUrl(product: Product) {
+    return btoa(JSON.stringify(product));
+  }
   ngOnInit() {
     this.getProducts();
   }
 
   getProducts() {
     this.productService.getProducts().subscribe((products) => {
-      this.data = products.map((e) => {
-        if (typeof e.logo !== 'string' || e.logo.indexOf('http') !== 0) {
-          e.logo = environment.defaultProductImageUrl;
-        }
-
-        if (e.date_release) {
-          e.date_release = new Date(e.date_release).toLocaleDateString();
-        }
-
-        if (e.date_revision) {
-          e.date_revision = new Date(e.date_revision).toLocaleDateString();
-        }
-
-        return e;
-      });
+      this.data = products.reverse();
     });
   }
 

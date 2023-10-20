@@ -1,9 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+export interface TableDropdownOption {
+  label: string;
+  handle?: (item: any) => unknown;
+}
+
 export interface TableHeader {
   label: string;
-  key: string;
-  type: 'text' | 'imageUrl';
+  key?: string;
+  type: 'text' | 'imageUrl' | 'dropdown';
+  valueTransform?: (value: unknown) => string;
+  dropdownOptions?: TableDropdownOption[];
 }
 
 @Component({
@@ -25,6 +32,14 @@ export class GenericTableComponent implements OnInit {
       : Number.MAX_SAFE_INTEGER;
 
     this.setInitialPage();
+  }
+
+  valueTransform(header: TableHeader, value: unknown) {
+    if (typeof header.valueTransform !== 'function') {
+      return value;
+    }
+
+    return header.valueTransform(value);
   }
 
   setInitialPage() {

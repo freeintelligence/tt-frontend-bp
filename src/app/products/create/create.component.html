@@ -1,6 +1,6 @@
 <div class="generic-container">
   <div class="header">
-    <h1>Formulario de Registro</h1>
+    <h1>Formulario de {{ mode === "edit" ? "Edición" : "Registro" }}</h1>
   </div>
 
   <div class="separator"></div>
@@ -84,8 +84,21 @@
       </div>
 
       <div class="buttons-container">
-        <button type="button" class="secondary" (click)="reset()">Reiniciar</button>
-        <button type="submit" class="primary">Enviar</button>
+        <ng-container *ngIf="mode === 'create'">
+          <button type="button" class="secondary" (click)="reset()">
+            Reiniciar
+          </button>
+        </ng-container>
+
+        <ng-container *ngIf="mode === 'edit'">
+          <button type="button" class="secondary" (click)="goHome()">
+            Volver
+          </button>
+        </ng-container>
+
+        <button type="submit" class="primary">
+          {{ mode === "create" ? "Enviar" : "Actualizar" }}
+        </button>
       </div>
     </form>
   </div>
