@@ -12,25 +12,20 @@
             </ng-container>
 
             <ng-container *ngIf="header.type === 'imageUrl'">
-              <img [src]="valueTransform(header, item?.[header.key])" />
+              <app-avatar
+                height="52px"
+                [src]="valueTransform(header, item?.[header.key])"
+              ></app-avatar>
             </ng-container>
           </ng-container>
 
           <ng-container *ngIf="!header.key">
             <ng-container *ngIf="header.type === 'dropdown'">
-              <div class="dropdown">
-                <button class="dropbtn">
-                  <img src="/assets/images/elipsis.svg" />
-                </button>
-                <div class="dropdown-content">
-                  <a
-                    href="javascript:void(0)"
-                    *ngFor="let option of header.dropdownOptions"
-                    (click)="option.handle?.(item)"
-                    >{{ option.label }}</a
-                  >
-                </div>
-              </div>
+              <app-dropdown
+                [options]="
+                  setParametersToDropdownOptions(header.dropdownOptions, item)
+                "
+              ></app-dropdown>
             </ng-container>
           </ng-container>
         </td>

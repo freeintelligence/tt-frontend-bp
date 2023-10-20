@@ -1,0 +1,13 @@
+<div class="dropdown">
+  <button class="dropbtn">
+    <img src="/assets/images/elipsis.svg" />
+  </button>
+  <div class="dropdown-content">
+    <a
+      href="javascript:void(0)"
+      *ngFor="let option of options || []"
+      (click)="option.handle?.(option.parameters)"
+      >{{ option.label }}</a
+    >
+  </div>
+</div>

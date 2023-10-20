@@ -9,6 +9,8 @@ import { FormInputComponent } from './form-input/form-input.component';
 import { FormErrorTextComponent } from './form-error-text/form-error-text.component';
 import { FixedSpinnerComponent } from './fixed-spinner/fixed-spinner.component';
 import { GenericDialogComponent } from './generic-dialog/generic-dialog.component';
+import { AvatarComponent } from './avatar/avatar.component';
+import { DropdownComponent } from './dropdown/dropdown.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { GenericDialogComponent } from './generic-dialog/generic-dialog.componen
     FormErrorTextComponent,
     FixedSpinnerComponent,
     GenericDialogComponent,
+    AvatarComponent,
+    DropdownComponent,
   ],
   exports: [
     HeaderComponent,
@@ -30,6 +34,8 @@ import { GenericDialogComponent } from './generic-dialog/generic-dialog.componen
     FormErrorTextComponent,
     FixedSpinnerComponent,
     GenericDialogComponent,
+    AvatarComponent,
+    DropdownComponent,
   ],
 
   imports: [CommonModule, FormsModule],

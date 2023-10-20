@@ -42,3 +42,27 @@ export const randomString = (length: number) => {
     result += chars[Math.floor(Math.random() * chars.length)];
   return result;
 };
+
+export const cloneDeep = <T>(source: T): T => {
+  if (source === null || typeof source !== 'object' || source instanceof Date) {
+    return source;
+  }
+
+  if (Array.isArray(source)) {
+    return source.map((item) => cloneDeep(item)) as T;
+  }
+
+  if (typeof source === 'object') {
+    const clonedObj: any = {};
+
+    for (const key in source) {
+      if (source.hasOwnProperty(key)) {
+        clonedObj[key] = cloneDeep(source[key]);
+      }
+    }
+
+    return clonedObj as T;
+  }
+
+  return source;
+};
