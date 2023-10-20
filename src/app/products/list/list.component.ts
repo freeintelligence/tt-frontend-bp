@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertButton } from 'src/components/alert/alert.component';
 import { TableHeader } from 'src/components/generic-table/generic-table.component';
 import { environment } from 'src/environments/environment';
 import { Product, ProductService } from 'src/services/product.service';
@@ -61,7 +62,16 @@ export class ListComponent implements OnInit {
       ],
     },
   ];
+  public errorButtons: AlertButton[] = [
+    {
+      label: 'Volver a intentar',
+      color: 'primary',
+      width: '256px',
+      handle: () => this.getProducts(),
+    },
+  ];
   public data?: Product[];
+  public fetchError?: Error;
   public perPageOptions: number[] = [5, 10, 20];
   public searchTerm = '';
 
@@ -78,10 +88,15 @@ export class ListComponent implements OnInit {
   }
 
   getProducts() {
-    this.productService.getProducts().subscribe((products) => {
-      setTimeout(() => {
+    this.fetchError = undefined;
+
+    this.productService.getProducts().subscribe({
+      next: (products) => {
         this.data = products.reverse();
-      }, 4000);
+      },
+      error: (error) => {
+        this.fetchError = error;
+      },
     });
   }
 

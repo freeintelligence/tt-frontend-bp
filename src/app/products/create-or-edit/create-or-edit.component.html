@@ -84,21 +84,27 @@
       </div>
 
       <div class="buttons-container">
-        <ng-container *ngIf="mode === 'create'">
-          <button type="button" class="secondary" (click)="reset()">
-            Reiniciar
-          </button>
-        </ng-container>
+        <app-button
+          *ngIf="mode === 'create'"
+          type="button"
+          color="secondary"
+          (click)="reset()"
+        >
+          Reiniciar
+        </app-button>
 
-        <ng-container *ngIf="mode === 'edit'">
-          <button type="button" class="secondary" (click)="goHome()">
-            Volver
-          </button>
-        </ng-container>
+        <app-button
+          *ngIf="mode === 'edit'"
+          type="button"
+          color="secondary"
+          (click)="goHome()"
+        >
+          Volver
+        </app-button>
 
-        <button type="submit" class="primary">
+        <app-button type="submit" color="primary">
           {{ mode === "create" ? "Enviar" : "Actualizar" }}
-        </button>
+        </app-button>
       </div>
     </form>
   </div>

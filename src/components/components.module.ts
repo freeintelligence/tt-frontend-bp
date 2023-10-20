@@ -12,6 +12,8 @@ import { GenericDialogComponent } from './generic-dialog/generic-dialog.componen
 import { AvatarComponent } from './avatar/avatar.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { SkeletonComponent } from './skeleton/skeleton.component';
+import { AlertComponent } from './alert/alert.component';
+import { ButtonComponent } from './button/button.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { SkeletonComponent } from './skeleton/skeleton.component';
     AvatarComponent,
     DropdownComponent,
     SkeletonComponent,
+    AlertComponent,
+    ButtonComponent,
   ],
   exports: [
     HeaderComponent,
@@ -39,6 +43,8 @@ import { SkeletonComponent } from './skeleton/skeleton.component';
     AvatarComponent,
     DropdownComponent,
     SkeletonComponent,
+    AlertComponent,
+    ButtonComponent,
   ],
 
   imports: [CommonModule, FormsModule],

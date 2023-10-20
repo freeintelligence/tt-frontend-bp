@@ -3,21 +3,35 @@
     <app-input-text
       [(ngModel)]="searchTerm"
       type="text"
-      placeholder="Search..."
+      placeholder="Buscar..."
     ></app-input-text>
   </div>
 
   <div class="right-options">
     <ul>
-      <li><a routerLink="/products/create">Agregar</a></li>
+      <li>
+        <a routerLink="/products/create"
+          ><app-button color="primary" size="small">Agregar</app-button></a
+        >
+      </li>
     </ul>
   </div>
 </div>
 
 <div class="main">
-  <app-generic-table
-    [headers]="headers"
-    [data]="filteredProducts()"
-    [perPageOptions]="perPageOptions"
-  ></app-generic-table>
+  <ng-container *ngIf="fetchError; else tableData">
+    <app-alert
+      color="danger"
+      message="Tenemos problemas para obtener la lista de productos, intenta más tarde!"
+      [buttons]="errorButtons"
+    ></app-alert>
+  </ng-container>
+
+  <ng-template #tableData>
+    <app-generic-table
+      [headers]="headers"
+      [data]="filteredProducts()"
+      [perPageOptions]="perPageOptions"
+    ></app-generic-table>
+  </ng-template>
 </div>

@@ -1,0 +1,15 @@
+<div class="generic-container alert" [ngClass]="getAdditionalClasses()">
+  <p>{{ message }}</p>
+  <div class="separator"></div>
+
+  <div class="buttons-container">
+    <app-button
+      *ngFor="let button of buttons"
+      [color]="button.color"
+      [width]="button.width"
+      type="button"
+      (click)="button?.handle()"
+      >{{ button.label }}</app-button
+    >
+  </div>
+</div>
