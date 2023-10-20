@@ -11,6 +11,7 @@ import { FixedSpinnerComponent } from './fixed-spinner/fixed-spinner.component';
 import { GenericDialogComponent } from './generic-dialog/generic-dialog.component';
 import { AvatarComponent } from './avatar/avatar.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
+import { SkeletonComponent } from './skeleton/skeleton.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { DropdownComponent } from './dropdown/dropdown.component';
     GenericDialogComponent,
     AvatarComponent,
     DropdownComponent,
+    SkeletonComponent,
   ],
   exports: [
     HeaderComponent,
@@ -36,6 +38,7 @@ import { DropdownComponent } from './dropdown/dropdown.component';
     GenericDialogComponent,
     AvatarComponent,
     DropdownComponent,
+    SkeletonComponent,
   ],
 
   imports: [CommonModule, FormsModule],

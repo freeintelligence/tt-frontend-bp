@@ -16,8 +16,10 @@ export interface TableHeader {
   styleUrls: ['./generic-table.component.scss'],
 })
 export class GenericTableComponent implements OnInit {
+  public SKELETON_ROWS = new Array(5).fill(undefined);
+
   @Input() headers: TableHeader[] = [];
-  @Input() data: { [key: string]: unknown }[] = [];
+  @Input() data?: { [key: string]: unknown }[];
   @Input() perPageOptions: number[] = [];
 
   public resultsPerPage: number = Number.MAX_SAFE_INTEGER;
@@ -57,7 +59,7 @@ export class GenericTableComponent implements OnInit {
   }
 
   getRows() {
-    return this.data.slice(
+    return this.data?.slice(
       (this.currentPage - 1) * this.resultsPerPage,
       this.currentPage * this.resultsPerPage
     );

@@ -61,7 +61,7 @@ export class ListComponent implements OnInit {
       ],
     },
   ];
-  public data: Product[] = [];
+  public data?: Product[];
   public perPageOptions: number[] = [5, 10, 20];
   public searchTerm = '';
 
@@ -79,7 +79,9 @@ export class ListComponent implements OnInit {
 
   getProducts() {
     this.productService.getProducts().subscribe((products) => {
-      this.data = products.reverse();
+      setTimeout(() => {
+        this.data = products.reverse();
+      }, 4000);
     });
   }
 
@@ -92,7 +94,7 @@ export class ListComponent implements OnInit {
 
     const termOptions = searchTerm.toLowerCase().split(' ');
 
-    return this.data.filter((item) => {
+    return this.data?.filter((item) => {
       return termOptions.filter((term) => {
         return (
           item?.name?.toLowerCase().indexOf(term) !== -1 ||
