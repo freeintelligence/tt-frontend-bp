@@ -80,6 +80,10 @@ export class CreateComponent implements OnInit {
     return null;
   }
 
+  reset() {
+    this.form.reset();
+  }
+
   async submit() {
     if (this.form.invalid) {
       return markFormAsTouched(this.form);
