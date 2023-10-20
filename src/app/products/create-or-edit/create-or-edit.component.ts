@@ -14,11 +14,11 @@ import {
 import { ValidatorDateAfterThan } from 'src/validators/ValidatorDateAfterThan';
 
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.scss'],
+  selector: 'app-create-or-edit',
+  templateUrl: './create-or-edit.component.html',
+  styleUrls: ['./create-or-edit.component.scss'],
 })
-export class CreateComponent implements OnInit {
+export class CreateOrEditComponent implements OnInit {
   public mode: 'create' | 'edit' = 'create';
 
   form = new FormGroup({
@@ -38,7 +38,7 @@ export class CreateComponent implements OnInit {
       Validators.maxLength(200),
     ]),
     logo: new FormControl('', [Validators.required]),
-    date_release: new FormControl(currentDate(), [
+    date_release: new FormControl('', [
       Validators.required,
       ValidatorDateAfterThan(new Date(currentDate())),
     ]),
@@ -60,20 +60,25 @@ export class CreateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mode = this.route.snapshot.params['id'] ? 'edit' : 'create';
+    this.mode = this.route.snapshot.params['product-data'] ? 'edit' : 'create';
 
     if (this.mode === 'edit') {
       this.loadProductData();
     } else {
-      this.form.controls.id.setValue(randomString(10));
+      this.loadDefaultData();
     }
 
     this.setDateRevision();
   }
 
+  loadDefaultData() {
+    this.form.controls.id.setValue(randomString(10));
+    this.form.controls.date_release.setValue(currentDate());
+  }
+
   loadProductData() {
     try {
-      const productAsBase64 = this.route.snapshot.params['id'];
+      const productAsBase64 = this.route.snapshot.params['product-data'];
       const productAsJsonString = atob(productAsBase64);
       const product: Product = JSON.parse(productAsJsonString);
 
@@ -231,9 +236,8 @@ export class CreateComponent implements OnInit {
 
   async ifSubmitSuccess() {
     const message = {
-      create:
-      `Se registró correctamente el servicio "${this.form.controls.name.value}" (${this.form.controls.id.value})!`,
-      edit:`Se editó correctamente el servicio "${this.form.controls.name.value}" (${this.form.controls.id.value})!`,
+      create: `Se registró correctamente el servicio "${this.form.controls.name.value}" (${this.form.controls.id.value})!`,
+      edit: `Se editó correctamente el servicio "${this.form.controls.name.value}" (${this.form.controls.id.value})!`,
     };
 
     return this.genericDialogService.show({

@@ -6,10 +6,10 @@ import { ProductsComponent } from './products.component';
 import { ListComponent } from './list/list.component';
 import { ComponentsModule } from 'src/components/components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CreateComponent } from './create/create.component';
+import { CreateOrEditComponent } from './create-or-edit/create-or-edit.component';
 
 @NgModule({
-  declarations: [ProductsComponent, ListComponent, CreateComponent],
+  declarations: [ProductsComponent, ListComponent, CreateOrEditComponent],
   imports: [
     CommonModule,
     ComponentsModule,
