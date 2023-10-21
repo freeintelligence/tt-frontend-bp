@@ -21,7 +21,7 @@ export interface GenericDialogEvent {
   providedIn: 'root',
 })
 export class GenericDialogService {
-  private status: boolean = false;
+  public status: boolean = false;
   public onChange: EventEmitter<GenericDialogEvent> =
     new EventEmitter<GenericDialogEvent>();
   public data!: GenericDialogData;

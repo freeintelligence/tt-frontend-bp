@@ -87,6 +87,8 @@ export class ListComponent implements OnInit {
     return btoa(JSON.stringify(product));
   }
 
+  public conteo = 0;
+
   getProducts() {
     this.fetchError = undefined;
 

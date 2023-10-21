@@ -163,13 +163,11 @@ export class ProductService {
         {
           label: 'Cancelar',
           type: 'secondary',
-          width: '50%',
           handle: () => this.genericDialogService.hide(),
         },
         {
           label: 'Confirmar',
           type: 'primary',
-          width: '50%',
           handle: () => {
             this.genericDialogService.hide();
             this.confirmDeleteProductDialog(product);

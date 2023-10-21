@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 
 export interface ValidationMessages {
   [key: string]: string;
@@ -11,6 +11,6 @@ export interface ValidationMessages {
   styleUrls: ['./form-error-text.component.scss'],
 })
 export class FormErrorTextComponent {
-  @Input() control!: FormControl;
+  @Input() control?: AbstractControl<any, any> | undefined;
   @Input() validationMessages: ValidationMessages = {};
 }

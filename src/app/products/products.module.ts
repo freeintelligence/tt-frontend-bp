@@ -12,10 +12,10 @@ import { CreateOrEditComponent } from './create-or-edit/create-or-edit.component
   declarations: [ProductsComponent, ListComponent, CreateOrEditComponent],
   imports: [
     CommonModule,
-    ComponentsModule,
     ProductsRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    ComponentsModule,
   ],
 })
 export class ProductsModule {}

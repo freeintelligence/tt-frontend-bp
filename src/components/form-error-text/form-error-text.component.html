@@ -1,10 +1,10 @@
 <ng-container
-  *ngIf="control.invalid && (control.touched || control.dirty)"
+  *ngIf="control?.invalid && (control?.touched || control?.dirty)"
   [ngSwitch]="true"
 >
   <ng-container *ngFor="let validation of validationMessages | keyvalue">
     <p>
-      <ng-container *ngSwitchCase="!!control.errors?.[validation.key]">
+      <ng-container *ngSwitchCase="!!control?.errors?.[validation.key]">
         {{ validation.value }}
       </ng-container>
     </p>

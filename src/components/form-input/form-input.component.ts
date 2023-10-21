@@ -1,6 +1,10 @@
 import { Component, Input, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FormControl, ControlContainer } from '@angular/forms';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  ControlContainer,
+} from '@angular/forms';
 import { ValidationMessages } from '../form-error-text/form-error-text.component';
 
 @Component({
@@ -16,7 +20,7 @@ import { ValidationMessages } from '../form-error-text/form-error-text.component
   ],
 })
 export class FormInputComponent implements ControlValueAccessor {
-  @Input() formControl!: FormControl;
+  @Input() formControl?: AbstractControl<any, any> | undefined;
   @Input() formControlName!: string;
 
   @Input() placeholder: string = '';
@@ -31,14 +35,17 @@ export class FormInputComponent implements ControlValueAccessor {
   constructor(private controlContainer: ControlContainer) {}
 
   get control() {
-    return (
+    const resultControl =
       this.formControl ||
-      this.controlContainer?.control?.get(this.formControlName)
-    );
+      this.controlContainer?.control?.get(this.formControlName);
+    return resultControl ?? undefined;
   }
 
   onInput(event: any) {
     this.value = event?.target?.value;
+
+    this.control?.markAsDirty();
+    this.control?.markAsTouched();
 
     this.onTouch();
     this.onChange(this.value);

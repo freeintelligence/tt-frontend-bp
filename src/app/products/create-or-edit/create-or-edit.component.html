@@ -88,6 +88,7 @@
           *ngIf="mode === 'create'"
           type="button"
           color="secondary"
+          width="164px"
           (click)="reset()"
         >
           Reiniciar
@@ -97,12 +98,13 @@
           *ngIf="mode === 'edit'"
           type="button"
           color="secondary"
+          width="164px"
           (click)="goHome()"
         >
           Volver
         </app-button>
 
-        <app-button type="submit" color="primary">
+        <app-button type="submit" color="primary" width="164px">
           {{ mode === "create" ? "Enviar" : "Actualizar" }}
         </app-button>
       </div>

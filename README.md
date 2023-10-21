@@ -1,27 +1,34 @@
-# TtFrontendBp
+# Prueba técnica Frontend BP
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.6.
+Este proyecto fue realizado para una prueba técnica frontend con Angular para Banco Pichincha.
 
-## Development server
+## Configuración previa:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Antes de ejecutar el proyecto debe configurar las variables de entorno para un correcto funcionamiento. Se encuentran en los archivos `src\environments\environment.development.ts` y `src\environments\environment.ts` dependiendo el ambiente (desarrollo o producción).
+Un ejemplo de las variables de entorno para desarrollo son:
+```TS
+export const environment = {
+  production: false,
+  authorId: '500',
+  apiUrl:
+    'https://tribu-ti-staffing-desarrollo-afangwbmcrhucqfh.z01.azurefd.net/ipf-msa-productosfinancieros',
+  defaultProductImageUrl: 'https://via.placeholder.com/150',
+};
 
-## Code scaffolding
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Servidor de desarrollo:
 
-## Build
+Ejecutar `ng serve` para un servidor de deesarrollo. Navegar a `http://localhost:4200/`. La aplicación se recargará automáticamente si cambia alguno de los archivos fuente.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Compilar:
 
-## Running unit tests
+Ejecutar `ng build` para compilar el proyecto. El resultado estará disponible en el directorio `dist/`.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Pruebas unitarias:
 
-## Running end-to-end tests
+Ejecutar `ng test` para ejecutar las pruebas unitarias vía [Karma](https://karma-runner.github.io).
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Ayuda:
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Para obtener más ayuda sobre Angular CLI, use `ng help` o consulte el [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

@@ -4,7 +4,7 @@ import { EventEmitter, Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class FixedSpinnerService {
-  private status: boolean = false;
+  public status: boolean = false;
   public onChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() {}

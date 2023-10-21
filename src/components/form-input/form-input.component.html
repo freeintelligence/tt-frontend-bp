@@ -5,7 +5,7 @@
   [disabled]="isDisabled"
   (input)="onInput($event)"
   (blur)="onTouch()"
-  [class.danger]="control.invalid && (control.touched || control.dirty)"
+  [class.danger]="control?.invalid && (control?.touched || control?.dirty)"
 />
 
 <app-form-error-text

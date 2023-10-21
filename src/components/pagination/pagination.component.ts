@@ -33,6 +33,7 @@ export class PaginationComponent {
   }
 
   changePage(page: number) {
+    this.currentPage = page;
     this.pageChange.emit(page);
   }
 

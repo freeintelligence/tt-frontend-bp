@@ -1,5 +1,11 @@
 import { Component, Input, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  AbstractControl,
+  ControlContainer,
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  NgForm,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-input-text',
@@ -12,8 +18,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       multi: true,
     },
   ],
+  viewProviders: [
+    { provide: ControlContainer, useExisting: NgForm },
+    { provide: NgForm, useExisting: null },
+  ],
 })
 export class InputTextComponent implements ControlValueAccessor {
+  @Input() formControl?: AbstractControl<any, any> | undefined;
+  @Input() formControlName!: string;
+
   @Input() placeholder!: string;
   @Input() type!: string;
 
@@ -22,8 +35,20 @@ export class InputTextComponent implements ControlValueAccessor {
   onChange = (value: string) => {};
   onTouch = () => {};
 
+  constructor(private controlContainer: ControlContainer) {}
+
+  get control() {
+    const resultControl =
+      this.formControl ||
+      this.controlContainer?.control?.get(this.formControlName);
+    return resultControl ?? undefined;
+  }
+
   onInput(event: any) {
     this.value = event?.target?.value;
+
+    this.control?.markAsDirty();
+    this.control?.markAsTouched();
 
     this.onTouch();
     this.onChange(this.value);
